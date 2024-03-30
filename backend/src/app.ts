@@ -1,6 +1,7 @@
 import "reflect-metadata"
 import cors from 'cors'
 import "dotenv/config";
+import path from 'path';
 import express, {Request, Response} from 'express'
 import cookieParser from "cookie-parser"
 import dataSource from "./config/dataSource";
@@ -32,6 +33,8 @@ app.get("/test", (res: Response, req: Request) => {
 
 app.use("/api/user",     userRoutes)
 app.use("/api/interest", interestRoutes)
+
+app.use(express.static(path.join(__dirname, "../../frontend/dist")))
 
 app.listen(PORT, ()=> {
     console.log(`Server has started on port ${PORT}`)
